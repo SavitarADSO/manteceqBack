@@ -14,12 +14,11 @@ class CreateMantenimientoHasEquiposTable extends Migration
     public function up()
     {
         Schema::create('mantenimiento_has_equipos', function (Blueprint $table) {
-                        
             $table->unsignedBigInteger('mantenimiento_id');
             $table->foreign('mantenimiento_id')->references('id')->on('mantenimientos')->onDelete('cascade');
             $table->string('equipo_codigo_inventario');
             $table->foreign('equipo_codigo_inventario')->references('codigo_inventario')->on('equipos')->onDelete('cascade');
-            $table->primary(['mantenimiento_id','equipo_codigo_inventario']);
+            $table->primary(['mantenimiento_id', 'equipo_codigo_inventario'], 'mantenimiento_equipo_primary');
         });
     }
 
@@ -31,6 +30,5 @@ class CreateMantenimientoHasEquiposTable extends Migration
     public function down()
     {
         Schema::dropIfExists('mantenimiento_has_equipos');
-
     }
 }
